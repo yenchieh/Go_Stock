@@ -1,0 +1,39 @@
+{
+  "name": "Go_Stock",
+  "version": "0.0.1",
+  "description": "Go plug React",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack --progress -p"
+  },
+  "dependencies": {
+    "bootstrap-loader": "^1.0.10",
+    "bootstrap-sass": "^3.3.6",
+    "exports-loader": "^0.6.3",
+    "file-loader": "^0.8.5",
+    "imports-loader": "^0.6.5",
+    "or": "^0.2.0",
+    "react": "^15.0.1",
+    "react-addons-update": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-localstorage": "^0.2.9",
+    "react-pstate": "git+https://github.com/mgechev/react-pstate.git",
+    "react-router": "^2.3.0",
+    "resolve-url-loader": "^1.4.3",
+    "url-loader": "^0.5.7",
+    "whatwg-fetch": "^0.11.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.8.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "expose-loader": "^0.7.1",
+    "node-sass": "^3.4.2",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.12.15"
+  }
+}
