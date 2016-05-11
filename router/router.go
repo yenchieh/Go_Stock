@@ -11,6 +11,8 @@ func InitRoutes() *gin.Engine {
 	r.GET("/", index)
 	r.GET("/build/:fileName", resource)
 
+	InitQuoteRouter(r)
+
 	return r
 }
 
