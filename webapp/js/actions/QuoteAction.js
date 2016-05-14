@@ -31,3 +31,16 @@ export function getQuoteData(symbol){
 		}
 	);
 }
+
+export function updateCheckedQuoteList(checkedList){
+	dispatcher.dispatch({
+		type: constants.UPDATE_CHECKED_LIST,
+		data: checkedList
+	});
+}
+
+export function removeQuoteByCheckedlist(){
+	dispatcher.dispatch({
+		type: constants.REMOVE_QUOTE
+	});
+}

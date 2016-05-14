@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import update from 'react-addons-update';
+import * as QuoteAction from '../actions/QuoteAction.js';
 
 var QuoteTable = React.createClass({
 	getInitialState: function(){
@@ -15,7 +15,8 @@ var QuoteTable = React.createClass({
 
 	componentWillReceiveProps: function(props){
 		this.setState({
-			quotes: props.quote
+			quotes: props.quote,
+			checkedQuote: props.checkedQuote
 		})
 	},
 
@@ -30,11 +31,7 @@ var QuoteTable = React.createClass({
 	},
 
 	setCheckedSymbol: function(event){
-		var checkedQuote = this.state.checkedQuote;
-		var updatedCheckedQuote = update(checkedQuote, {$push: [event.target.value.toUpperCase()]});
-		this.setState({
-			checkedQuote: updatedCheckedQuote
-		});
+		QuoteAction.updateCheckedQuoteList(event.target.value);
 	},
 
 	render: function(){

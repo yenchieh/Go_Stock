@@ -11,14 +11,16 @@ import QuoteTable from './quote.js';
 var SearchPage = React.createClass({
 	getInitialState: function(){
 		return {
-			quoteData: []
+			quoteData: [],
+			checkedQuote: []
 		}
 	},
 
 	componentWillMount: function(){
 		SearchStockStore.on('change', () => {
 			this.setState({
-				quoteData: SearchStockStore.getAllQuoteData()
+				quoteData: SearchStockStore.getAllQuoteData(),
+				checkedQuote: SearchStockStore.getCheckedQuote()
 			})
 		});
 	},
@@ -42,6 +44,10 @@ var SearchPage = React.createClass({
 		this.text.val("");
 	},
 
+	removeQuote: function(){
+		QuoteAction.removeQuoteByCheckedlist();
+	},
+
 	render: function(){
 		return (
 			<div>
@@ -61,10 +67,10 @@ var SearchPage = React.createClass({
 						<h1>Quote List</h1>
 						<div id="listOption">
 							<button className="btn btn-sm btn-info">Add to your watch list</button>
-							<button className="btn btn-sm btn-danger">Delete</button>
+							<button className="btn btn-sm btn-danger" onClick={this.removeQuote}>Delete</button>
 						</div>
 
-						<QuoteTable quote={this.state.quoteData} />
+						<QuoteTable quote={this.state.quoteData} checkedQuote={this.state.checkedQuote} />
 					</div>
 				</div>
 			</div>
