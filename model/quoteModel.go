@@ -1,6 +1,10 @@
 package model
 
-import "gopkg.in/mgo.v2/bson"
+import (
+	"gopkg.in/mgo.v2/bson"
+	"encoding/json"
+	"bytes"
+)
 
 type (
 	YahooData struct {
@@ -15,8 +19,11 @@ type (
 		Results YahooQuote `json:"results"`
 	}
 
+
+
 	YahooQuote struct {
-		Quote StockQuote `json:"quote"`
+		Quote *StockQuote `json:"quote"`
+		Quotes []StockQuote `json:"quotes"`
 	}
 
 	StockQuote struct {
@@ -31,5 +38,47 @@ type (
 		Volume string `json:"volume"`
 	}
 
+	//Handle ArrayStruct or Struct
+	structOrArray struct {
+		parent *YahooQuote
+		s StockQuote
+		a []StockQuote
+	}
+
+	middleQuote struct {
+		Load structOrArray `json:"quote"`
+	}
+
 
 )
+
+func (this *structOrArray) UnmarshalJSON(data []byte) error{
+	d := json.NewDecoder(bytes.NewBuffer(data))
+	t, err := d.Token()
+	if err != nil {
+		return err
+	}
+
+	if t == json.Delim('['){
+		if err := json.Unmarshal(data, &this.a); err != nil {
+			return err
+		}
+		return nil
+	}
+
+	if err := json.Unmarshal(data, &this.s); err != nil{
+		return err
+	}
+
+	return nil
+}
+
+func (this *YahooQuote) UnmarshalJSON(data []byte) error {
+	mq := middleQuote{}
+	if err := json.Unmarshal(data, &mq); err != nil{
+		return err
+	}
+	this.Quote = &mq.Load.s
+	this.Quotes = mq.Load.a
+	return nil
+}
