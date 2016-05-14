@@ -3,52 +3,70 @@
  */
 
 import React from 'react';
+import _ from 'underscore';
 import SearchStockStore from '../stores/SearchStockStore.js';
 import dispatcher from '../dispatcher/appDispatcher.js';
 import * as QuoteAction from '../actions/QuoteAction.js';
 import QuoteTable from './quote.js';
 
 var SearchPage = React.createClass({
-	getInitialState: function(){
+	getInitialState: function () {
 		return {
 			quoteData: [],
 			checkedQuote: []
 		}
 	},
 
-	componentWillMount: function(){
+	componentWillMount: function () {
 		SearchStockStore.on('change', () => {
 			this.setState({
 				quoteData: SearchStockStore.getAllQuoteData(),
 				checkedQuote: SearchStockStore.getCheckedQuote()
-			})
+			});
+
+			if (SearchStockStore.getCheckedQuote().length == 0) {
+				_.each(this.$optionButtons, function (data) {
+					$(data).addClass('disabled');
+				});
+			} else {
+				_.each(this.$optionButtons, function (data) {
+					$(data).removeClass('disabled');
+				});
+			}
 		});
 	},
 
-	componentDidMount: function(){
+	componentDidMount: function () {
 		this.setState({
 			quoteData: SearchStockStore.getAllQuoteData()
 		});
+		this.$optionButtons = $('button', '#listOption');
+
+		if (this.state.checkedQuote.length == 0) {
+			_.each(this.$optionButtons, function (data) {
+				$(data).addClass('disabled');
+			});
+		}
 
 		this.text = $('input[name="symbol"]');
 	},
 
-	keyPressed: function(e){
+	keyPressed: function (e) {
 		if (e.key == "Enter") {
 			this.searchQuoteData();
 		}
 	},
 
-	searchQuoteData: function(){
+	searchQuoteData: function () {
 		QuoteAction.getQuoteData(this.text.val());
 		this.text.val("");
 	},
 
-	removeQuote: function(){
+	removeQuote: function () {
 		QuoteAction.removeQuoteByCheckedlist();
 	},
 
-	render: function(){
+	render: function () {
 		return (
 			<div>
 				<div id="mainSearchComponent">
@@ -65,12 +83,13 @@ var SearchPage = React.createClass({
 
 					<div id="quoteList">
 						<h1>Quote List</h1>
+
 						<div id="listOption">
 							<button className="btn btn-sm btn-info">Add to your watch list</button>
 							<button className="btn btn-sm btn-danger" onClick={this.removeQuote}>Delete</button>
 						</div>
 
-						<QuoteTable quote={this.state.quoteData} checkedQuote={this.state.checkedQuote} />
+						<QuoteTable quote={this.state.quoteData} checkedQuote={this.state.checkedQuote}/>
 					</div>
 				</div>
 			</div>

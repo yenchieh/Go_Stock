@@ -24,6 +24,7 @@
     "react-pstate": "git+https://github.com/mgechev/react-pstate.git",
     "react-router": "^2.3.0",
     "resolve-url-loader": "^1.4.3",
+    "underscore": "^1.8.3",
     "url-loader": "^0.5.7",
     "whatwg-fetch": "^0.11.0"
   },
