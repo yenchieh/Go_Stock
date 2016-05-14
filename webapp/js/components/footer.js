@@ -7,7 +7,7 @@ var Footer = React.createClass({
 	render: function(){
 		return (
 			<footer>
-				© Created 2016 By Yen-Chieh Chen.
+				© Created 2016 By Yen-Chieh Chen. <span className="github"><a href="https://github.com/yenchieh/Go_Stock/" target="_blank">Github</a></span>
 			</footer>
 		)
 	}

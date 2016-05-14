@@ -3,23 +3,17 @@
  */
 
 import React from 'react';
+import update from 'react-addons-update';
 
 var QuoteTable = React.createClass({
 	getInitialState: function(){
 		return{
-			quotes: []
+			quotes: [],
+			checkedQuote: []
 		}
 	},
 
-/*	componentDidMount: function(){
-		console.log(this.props.quote);
-
-		this.setState({quotes: this.props.quote});
-	},*/
-
 	componentWillReceiveProps: function(props){
-		console.log(props.quote);
-
 		this.setState({
 			quotes: props.quote
 		})
@@ -35,10 +29,23 @@ var QuoteTable = React.createClass({
 		)
 	},
 
+	setCheckedSymbol: function(event){
+		var checkedQuote = this.state.checkedQuote;
+		var updatedCheckedQuote = update(checkedQuote, {$push: [event.target.value.toUpperCase()]});
+		this.setState({
+			checkedQuote: updatedCheckedQuote
+		});
+	},
+
 	render: function(){
+
 		var quoteTable = this.state.quotes.map(function (quote, i) {
+			var isChecked = this.state.checkedQuote.indexOf(quote.symbol.toUpperCase()) != -1;
 			return (
 				<tr key={i}>
+					<td>
+						<input type="checkbox" name="checkedSymbol" value={quote.symbol} checked={isChecked} onChange={this.setCheckedSymbol} />
+					</td>
 					<td>
 						{quote.name}
 					</td>
@@ -68,6 +75,7 @@ var QuoteTable = React.createClass({
 				<table className="table table-hover">
 					<thead>
 					<tr>
+						<th></th>
 						<th>Name</th>
 						<th>Symbol</th>
 						<th>Open</th>

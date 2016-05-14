@@ -11,12 +11,12 @@ import QuoteTable from './quote.js';
 var SearchPage = React.createClass({
 	getInitialState: function(){
 		return {
-			quoteData: SearchStockStore.getAllQuoteData()
+			quoteData: []
 		}
 	},
 
 	componentWillMount: function(){
-		SearchStockStore.on('change', () =>{
+		SearchStockStore.on('change', () => {
 			this.setState({
 				quoteData: SearchStockStore.getAllQuoteData()
 			})
@@ -24,6 +24,10 @@ var SearchPage = React.createClass({
 	},
 
 	componentDidMount: function(){
+		this.setState({
+			quoteData: SearchStockStore.getAllQuoteData()
+		});
+
 		this.text = $('input[name="symbol"]');
 	},
 
@@ -55,6 +59,11 @@ var SearchPage = React.createClass({
 
 					<div id="quoteList">
 						<h1>Quote List</h1>
+						<div id="listOption">
+							<button className="btn btn-sm btn-info">Add to your watch list</button>
+							<button className="btn btn-sm btn-danger">Delete</button>
+						</div>
+
 						<QuoteTable quote={this.state.quoteData} />
 					</div>
 				</div>

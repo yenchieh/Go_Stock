@@ -8,7 +8,7 @@ import constants from '../constants/mainConstants.js';
 class SearchStockStore extends EventEmitter {
 	constructor() {
 		super();
-		this.quoteData = []
+		this.quoteData = localStorage.getItem("QuoteData") ? JSON.parse(localStorage.getItem("QuoteData")) : [];
 	}
 
 	addQuoteData(quoteData){
@@ -28,10 +28,15 @@ class SearchStockStore extends EventEmitter {
 		return this.quoteData;
 	}
 
+	updateQuoteDataHistory() {
+		localStorage.setItem("QuoteData", JSON.stringify(this.quoteData));
+	}
+
 	handleAction(action){
 		switch(action.type){
 			case constants.RECEIVED_QUOTE_DATA:
 				this.addQuoteData(action.data);
+				this.updateQuoteDataHistory();
 				break;
 		}
 	}
