@@ -18,12 +18,18 @@ var SearchPage = React.createClass({
 	},
 
 	componentWillMount: function () {
-		SearchStockStore.on('change', () => {
+		SearchStockStore.on('updateQuoteData', () => {
 			this.setState({
-				quoteData: SearchStockStore.getAllQuoteData(),
-				checkedQuote: SearchStockStore.getCheckedQuote()
+				quoteData: SearchStockStore.getAllQuoteData()
 			});
 
+			this.$quoteButton.button('reset')
+		});
+
+		SearchStockStore.on('updateCheckedList', () => {
+			this.setState({
+				checkedQuote: SearchStockStore.getCheckedQuote()
+			});
 			if (SearchStockStore.getCheckedQuote().length == 0) {
 				_.each(this.$optionButtons, function (data) {
 					$(data).addClass('disabled');
@@ -33,7 +39,7 @@ var SearchPage = React.createClass({
 					$(data).removeClass('disabled');
 				});
 			}
-		});
+		})
 	},
 
 	componentDidMount: function () {
@@ -49,6 +55,7 @@ var SearchPage = React.createClass({
 		}
 
 		this.text = $('input[name="symbol"]');
+		this.$quoteButton = $('#getQuoteButton');
 	},
 
 	keyPressed: function (e) {
@@ -58,12 +65,17 @@ var SearchPage = React.createClass({
 	},
 
 	searchQuoteData: function () {
+		this.$quoteButton.button('loading');
 		QuoteAction.getQuoteData(this.text.val());
 		this.text.val("");
 	},
 
 	removeQuote: function () {
 		QuoteAction.removeQuoteByCheckedlist();
+	},
+
+	addToWatchList: function() {
+
 	},
 
 	render: function () {
@@ -77,7 +89,7 @@ var SearchPage = React.createClass({
 								<input type="text" name="symbol" className="form-control" id="symbolSearchInput"
 											 placeholder="Enter symbol or stock name" onKeyPress={this.keyPressed}/>
 							</div>
-							<button className="btn btn-sm btn-primary" onClick={this.searchQuoteData}>Search</button>
+							<button className="btn btn-sm btn-primary" id="getQuoteButton" onClick={this.searchQuoteData} data-loading-text="Loading..." autocomplete="off">Search</button>
 						</div>
 					</figure>
 
@@ -85,8 +97,8 @@ var SearchPage = React.createClass({
 						<h1>Quote List</h1>
 
 						<div id="listOption">
-							<button className="btn btn-sm btn-info">Add to your watch list</button>
-							<button className="btn btn-sm btn-danger" onClick={this.removeQuote}>Delete</button>
+							<button className="btn btn-sm btn-info" id="watchListButton" onClick={this.addToWatchList}>Add to your watch list</button>
+							<button className="btn btn-sm btn-danger" id="deleteButton" onClick={this.removeQuote}>Delete</button>
 						</div>
 
 						<QuoteTable quote={this.state.quoteData} checkedQuote={this.state.checkedQuote}/>

@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "!style!css!sass!../scss/index.scss";
 import {Router, Route, IndexRoute, Link, browserHistory} from 'react-router';
-import LocalStorageMixin from 'react-localstorage';
 
 import Footer from './components/footer.js';
 import SearchPage from './components/search.js';
 
 
 var Index = React.createClass({
-	mixins: [LocalStorageMixin],
 	render: function(){
 
 		let renderTab = function(){

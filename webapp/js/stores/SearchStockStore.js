@@ -23,7 +23,7 @@ class SearchStockStore extends EventEmitter {
 			this.quoteData.unshift(quoteData);
 		}
 
-		this.emit("change");
+		this.emit("updateQuoteData");
 	}
 
 	updateCheckedList(checkedList){
@@ -36,7 +36,7 @@ class SearchStockStore extends EventEmitter {
 			this.checkedQuote = update(checkedQuote, {$push: [checkedList.toUpperCase()]});
 		}
 
-		this.emit("change");
+		this.emit("updateCheckedList");
 	}
 
 	getCheckedQuote() {
@@ -65,7 +65,8 @@ class SearchStockStore extends EventEmitter {
 		this.quoteData = newQuoteData;
 		this.updateQuoteDataHistory();
 
-		this.emit('change');
+		this.emit("updateQuoteData");
+		this.emit('updateCheckedList');
 	}
 
 	handleAction(action){
