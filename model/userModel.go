@@ -5,20 +5,23 @@ import (
 	"fmt"
 	"time"
 	"crypto/sha256"
+	"log"
+	"database/sql"
 )
 
 type (
 	User struct {
-		Id       []uint8 `json:"_id,omitempty"`
+		Id       uint32 `json:"_id,omitempty"`
 		Name     string `json:"name"`
 		Email    string `json:"email"`
 		Created  time.Time `json:"created"`
 		Password string
 		Role     Role `json:"role"`
+		Stocks []Stocks `json:"stockList"`
 	}
 
 	Role struct {
-		Id        []uint8 `json:"_id,omitempty"`
+		Id        uint32 `json:"_id,omitempty"`
 		Authority string `json:"authority"`
 	}
 
@@ -37,6 +40,20 @@ func GetUserByEmail(email string) (User, error) {
 	defer db.Close()
 
 	result := db.QueryRow("SELECT u.id, u.name, u.email, u.created, ur.id as roleId, ur.authority FROM user u left join user_role_connection uc on u.id = uc.user_id left join user_role ur on ur.id = uc.role_id WHERE u.email = ?", email)
+
+	if err := result.Scan(&user.Id, &user.Name, &user.Email, &user.Created, &user.Role.Id, &user.Role.Authority); err != nil {
+		return user, err
+	}
+
+	return user, nil
+}
+
+func GetUserById(Id []uint8) (User, error) {
+	user := User{}
+	db := data.GetDatabase()
+	defer db.Close()
+
+	result := db.QueryRow("SELECT u.id, u.name, u.email, u.created, ur.id as roleId, ur.authority FROM user u left join user_role_connection uc on u.id = uc.user_id left join user_role ur on ur.id = uc.role_id WHERE u.id = ?", Id)
 
 	if err := result.Scan(&user.Id, &user.Name, &user.Email, &user.Created, &user.Role.Id, &user.Role.Authority); err != nil {
 		return user, err
@@ -70,7 +87,7 @@ func (user *User) Create() (error) {
 		return err
 	}
 
-	fmt.Printf("Inserted Success with index: %d", insertedIndex)
+	fmt.Printf("Inserted Success with index: %d\n", insertedIndex)
 
 	//Inert user role connection
 	stmt, err = db.Prepare("INSERT user_role_connection SET user_id = ?, role_id = ?")
@@ -89,7 +106,7 @@ func (user *User) Create() (error) {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("Inserted User Role Connection Table. ID: %d", insertedIndex)
+	fmt.Printf("Inserted User Role Connection Table. ID: %d\n", insertedIndex)
 
 	return nil
 }
@@ -130,4 +147,77 @@ func GetRoleByAuthority(authority string) (role Role, err error) {
 	}else {
 		return role, nil
 	}
+}
+
+
+/** Stock Function **/
+func (this *User) SaveStock() error {
+	db := data.GetDatabase()
+	defer db.Close()
+
+	stocks := this.Stocks
+
+	for _, stock := range stocks {
+		//Check if the stock already in stock list database
+		var stockId int64 = -1
+		err := db.QueryRow("SELECT id FROM stocks WHERE name = ? and symbol = ?", stock.Name, stock.Symbol).Scan(&stockId)
+
+		if err != nil && err != sql.ErrNoRows {
+			return err
+		}
+
+		fmt.Printf("Stock ID: %d\n", stockId)
+
+		if stockId == -1 {
+			stmt, err := db.Prepare("INSERT stocks SET name = ?, symbol = ?")
+
+			if err != nil {
+				return err
+			}
+
+			res, err := stmt.Exec(stock.Name, stock.Symbol)
+
+			if err != nil {
+				return err
+			}
+
+			stockId, err = res.LastInsertId()
+
+			if err != nil {
+				return err
+			}
+
+			log.Printf("Stock inserted to stock list. ID: %d\n", stockId)
+
+
+
+		}
+
+		stock.Id = uint32(stockId)
+		//Connect between user and watch list -> user_stocks_connection
+		var exists bool
+		err = db.QueryRow("SELECT exists (SELECT id FROM user_stocks_connection WHERE user_id = ? and stock_id = ? and type = ?)", this.Id, stock.Id, stock.Type).Scan(&exists)
+
+		if err != nil && err != sql.ErrNoRows {
+			return err
+		}
+
+		if !exists {
+			stmt, err := db.Prepare("INSERT user_stocks_connection SET user_id = ?, stock_id = ?, type = ?")
+			if err != nil {
+				return err
+			}
+			fmt.Printf("Stock ID: %d", stock.Id)
+
+			_, err = stmt.Exec(this.Id, stock.Id, stock.Type)
+
+			if err != nil {
+				log.Printf(err.Error())
+				return err
+			}
+		}
+
+	}
+	return nil
+
 }

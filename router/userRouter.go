@@ -6,7 +6,9 @@ import (
 )
 
 func InitUserRouter(r *gin.Engine){
-	r.POST("/user/create", controller.CreateUser)
-	r.POST("/user/get/:email", controller.GetUserByEmail)
+	r.POST("/user/registerOrLogin", controller.RegisterOrLogin)
+	//r.POST("/user/create", controller.CreateUser)
+	r.GET("/user/get/:email", controller.GetUserByEmail)
+	r.GET("/user/check/:email", controller.CheckEmail)
 }
 

@@ -6,7 +6,7 @@ import dispatcher from '../dispatcher/appDispatcher.js';
 import constants from '../constants/mainConstants.js';
 import 'whatwg-fetch';
 
-export function getQuoteData(symbol){
+export function getQuoteData(symbol, source){
 	dispatcher.dispatch({type: constants.FETCH_DATA_FROM_SERVER});
 
 	fetch(constants.API_DOMAIN + constants.API_SEARCH_STOCK + "?symbol=" + symbol, {
@@ -25,8 +25,33 @@ export function getQuoteData(symbol){
 				quoteData = data.query.results.quote;
 			}
 			dispatcher.dispatch({
-				type: constants.RECEIVED_QUOTE_DATA,
+				type: source,
 				data: quoteData
+			})
+		}
+	);
+}
+
+export function addCheckedQuoteToWatchList(user, checkedList) {
+	dispatcher.dispatch({type: constants.FETCH_DATA_FROM_SERVER});
+
+	var data = {
+		email: user.email,
+		stocks: checkedList
+	};
+
+	fetch(constants.API_DOMAIN + constants.API_ADD_WATCH_LIST, {
+		method: 'POST',
+		headers: constants.API_JSON_HEADER,
+		body: JSON.stringify(data)
+	}).then((response) => response.json())
+		.then((data) => {
+			if (!data || data.length == 0) {
+				return false;
+			}
+			dispatcher.dispatch({
+				type: constants.WATCH_LIST_UPDATED,
+				data: data
 			})
 		}
 	);

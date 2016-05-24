@@ -8,6 +8,7 @@ import SearchStockStore from '../stores/SearchStockStore.js';
 import dispatcher from '../dispatcher/appDispatcher.js';
 import * as QuoteAction from '../actions/QuoteAction.js';
 import QuoteTable from './quote.js';
+import constant from '../constants/mainConstants.js'
 
 var SearchPage = React.createClass({
 	getInitialState: function () {
@@ -18,28 +19,8 @@ var SearchPage = React.createClass({
 	},
 
 	componentWillMount: function () {
-		SearchStockStore.on('updateQuoteData', () => {
-			this.setState({
-				quoteData: SearchStockStore.getAllQuoteData()
-			});
-
-			this.$quoteButton.button('reset')
-		});
-
-		SearchStockStore.on('updateCheckedList', () => {
-			this.setState({
-				checkedQuote: SearchStockStore.getCheckedQuote()
-			});
-			if (SearchStockStore.getCheckedQuote().length == 0) {
-				_.each(this.$optionButtons, function (data) {
-					$(data).addClass('disabled');
-				});
-			} else {
-				_.each(this.$optionButtons, function (data) {
-					$(data).removeClass('disabled');
-				});
-			}
-		})
+		SearchStockStore.on('updateQuoteData', this.updateQuoteData);
+		SearchStockStore.on('updateCheckedList', this.updateCheckedList);
 	},
 
 	componentDidMount: function () {
@@ -58,6 +39,34 @@ var SearchPage = React.createClass({
 		this.$quoteButton = $('#getQuoteButton');
 	},
 
+	componentWillUnmount: function(){
+		SearchStockStore.removeListener("updateQuoteData", this.updateQuoteData);
+		SearchStockStore.removeListener("updateCheckedList", this.updateCheckedList);
+	},
+
+	updateQuoteData: function(){
+		this.setState({
+			quoteData: SearchStockStore.getAllQuoteData()
+		});
+
+		this.$quoteButton.button('reset');
+	},
+
+	updateCheckedList: function(){
+		this.setState({
+			checkedQuote: SearchStockStore.getCheckedQuote()
+		});
+		if (SearchStockStore.getCheckedQuote().length == 0) {
+			_.each(this.$optionButtons, function (data) {
+				$(data).addClass('disabled');
+			});
+		} else {
+			_.each(this.$optionButtons, function (data) {
+				$(data).removeClass('disabled');
+			});
+		}
+	},
+
 	keyPressed: function (e) {
 		if (e.key == "Enter") {
 			this.searchQuoteData();
@@ -66,7 +75,7 @@ var SearchPage = React.createClass({
 
 	searchQuoteData: function () {
 		this.$quoteButton.button('loading');
-		QuoteAction.getQuoteData(this.text.val());
+		QuoteAction.getQuoteData(this.text.val(), constant.RECEIVED_QUOTE_DATA_SEARCH);
 		this.text.val("");
 	},
 
@@ -74,8 +83,12 @@ var SearchPage = React.createClass({
 		QuoteAction.removeQuoteByCheckedlist();
 	},
 
-	addToWatchList: function() {
-
+	addToWatchList: function(e) {
+		//QuoteAction.addCheckedQuoteToWatchList();
+		if($(e.target).hasClass("disabled")){
+			return false;
+		}
+		this.props.addListButtonClicked();
 	},
 
 	render: function () {

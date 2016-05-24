@@ -17,6 +17,7 @@ func InitRoutes() *gin.Engine {
 
 	InitQuoteRouter(r)
 	InitUserRouter(r)
+	InitialWatchListRouter(r)
 
 	return r
 }

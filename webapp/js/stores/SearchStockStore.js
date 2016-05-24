@@ -71,7 +71,7 @@ class SearchStockStore extends EventEmitter {
 
 	handleAction(action){
 		switch(action.type){
-			case constants.RECEIVED_QUOTE_DATA:
+			case constants.RECEIVED_QUOTE_DATA_SEARCH:
 				this.addQuoteData(action.data);
 				this.updateQuoteDataHistory();
 				break;

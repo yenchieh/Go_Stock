@@ -14,11 +14,13 @@ type (
 
 	errorResource struct {
 		Data appError `json:"data"`
+		Success bool `json:"success"`
 	}
 )
 
 func RenderError(c *gin.Context, errCode int, handlerError error, message string){
 	errorResponse := errorResource{
+		Success: false,
 		Data: appError{
 			Error: handlerError.Error(),
 			Message: message,

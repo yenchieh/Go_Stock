@@ -4,43 +4,69 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go_stock_with_gin/common"
 	"net/http"
-	"errors"
 	"github.com/go_stock_with_gin/model"
 	"fmt"
 	"database/sql"
+	"github.com/go_stock_with_gin/data"
+	"errors"
 )
 
-func CreateUser(c *gin.Context){
-	name := c.PostForm("name")
-	email := c.PostForm("email")
-	password := c.PostForm("password")
+type UserCredential struct {
+	Email string `form:"email" json:"email" binding:"required"`
+	Password string `form:"password" json:"password" binding:"required"`
+	Name string `form:"name" json:"name"`
+}
 
-	if name == "" || email == "" || password == "" {
-		common.RenderError(c, http.StatusBadRequest, errors.New("Name, Email and Password are required"), "Name, Email and Password are required")
+func RegisterOrLogin(c *gin.Context) {
+	var json UserCredential
+
+	err := c.BindJSON(&json)
+	if err != nil {
+		common.RenderError(c, http.StatusBadRequest, err, "Email and Password are required")
 		return
 	}
 
-	fmt.Printf("Name: %s, Email: %s, password: %s\n\n", name, email, password)
+	fmt.Printf("Name: %s, Email: %s, password: %s\n", json.Name, json.Email, json.Password)
 
+	user, err := model.GetUserByEmail(json.Email)
+
+	if err != nil && err != sql.ErrNoRows {
+		common.RenderError(c, http.StatusInternalServerError, err, "Error on getting User")
+		return
+	}
+
+	if err == sql.ErrNoRows {
+		user, err = createUser(json.Email, json.Password, json.Name)
+		if err != nil {
+			common.RenderError(c, http.StatusInternalServerError, err, "Error on save user")
+			return;
+		}
+	} else {
+		//Doing login
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"data": user,
+	})
+}
+
+func createUser(email, password, name string) (user model.User, err error){
 	role, err := model.GetRoleByAuthority("ROLE_USER")
 
 	fmt.Printf("Role: %v\n", role.Id)
 	if err != nil {
-		common.RenderError(c, http.StatusInternalServerError, err, "Error on getting user Role")
-		return
+		return user, errors.New("Error on getting User Role")
 	}
 
-	user := model.User{
+	user = model.User{
 		Name: name,
 		Email: email,
 		Password: password,
 		Role: role,
 	}
 
-	if err := user.Create(); err != nil {
-		panic(err);
-	}
-
+	return user, user.Create()
 }
 
 func GetUserByEmail(c *gin.Context) {
@@ -61,4 +87,28 @@ func GetUserByEmail(c *gin.Context) {
 	fmt.Println(user.Role.Authority)
 
 	fmt.Println(user)
+}
+
+func CheckEmail(c *gin.Context){
+	email := c.Param("email")
+
+	db := data.GetDatabase()
+	defer db.Close()
+
+	user := db.QueryRow("SELECT * FROM user WHERE email = ?", email)
+
+	err := user.Scan()
+
+	if err != nil && err == sql.ErrNoRows{
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"exist": false,
+		})
+	}else{
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"exist": true,
+		})
+	}
+
 }
