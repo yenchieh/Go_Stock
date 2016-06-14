@@ -14,8 +14,9 @@ import (
 
 var yahooFinanceAPI string = "http://query.yahooapis.com/v1/public/yql"
 
-func GetQuoteBySymbol(c *gin.Context){
-	var symbolQuote model.YahooData
+
+func GetQuote(c *gin.Context){
+
 	symbol := c.Query("symbol")
 	fmt.Printf("Getting Quote from symbol: %s\n", symbol)
 	if(len(symbol) == 0){
@@ -23,18 +24,40 @@ func GetQuoteBySymbol(c *gin.Context){
 		return
 	}
 
-	log.Printf("Get %s quote data", symbol)
-	resultRaw, err := getQuoteFromYahoo(symbol)
+	symbolQuote, err := GetQuoteBySymbol(symbol)
 
 	if err != nil {
-		common.RenderError(c, http.StatusInternalServerError, err, "Internal Error")
-	}
-
-	if err := json.Unmarshal(resultRaw, &symbolQuote); err != nil {
-		common.RenderError(c, http.StatusInternalServerError, err, "Error on parsing JSON")
+		common.RenderError(c, http.StatusInternalServerError, err, "Error when getting Quote from Yahoo")
 	}
 
 	c.JSON(http.StatusOK, symbolQuote)
+}
+
+func GetQuoteByStocks(stocks []model.Stocks)(symbolQuote model.YahooData, err error){
+	var symbols string
+	for _, stock := range stocks {
+		symbols += stock.Symbol + ","
+	}
+	symbols = symbols[:len(symbols)-1]
+
+	symbolQuote, err = GetQuoteBySymbol(symbols)
+
+	if err != nil {
+		return symbolQuote, err
+	}
+
+	return symbolQuote, nil
+}
+
+
+func GetQuoteBySymbol(symbol string)(symbolQuote model.YahooData, err error){
+	resultRaw, err := getQuoteFromYahoo(symbol)
+
+	if err := json.Unmarshal(resultRaw, &symbolQuote); err != nil {
+		return symbolQuote, err
+	}
+
+	return symbolQuote, nil
 }
 
 

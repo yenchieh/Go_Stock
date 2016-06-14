@@ -8,6 +8,7 @@ import (
 	"log"
 	"github.com/go_stock_with_gin/config"
 	"github.com/go_stock_with_gin/data"
+	"errors"
 )
 
 type AddStockParams struct {
@@ -19,6 +20,11 @@ type AddStockParams struct {
 type response struct {
 	Success bool `json:"success"`
 	WatchList []model.Stocks `json:"watchList"`
+}
+
+type quoteResponse struct {
+	Success bool `json:"success"`
+	WatchList model.YahooData `json:"watchList"`
 }
 
 func AddStockToWatchList(c *gin.Context){
@@ -77,4 +83,36 @@ func AddStockToWatchList(c *gin.Context){
 
 
 	c.JSON(http.StatusOK, response)
+}
+
+func UserWatchListByEmail(c *gin.Context){
+	email := c.Query("email")
+
+	if email == "" {
+		common.RenderError(c, http.StatusBadRequest, errors.New("Email is required."), "Email is required")
+		return
+	}
+
+	stocks, err := model.UserWatchList(email)
+
+	if err != nil {
+		common.RenderError(c, http.StatusInternalServerError, err, "Error on getting user's watch list")
+		return
+	}
+
+	quotes, err := GetQuoteByStocks(stocks)
+
+	if err != nil {
+		common.RenderError(c, http.StatusInternalServerError, err, "Error on getting quotes from Yahoo")
+		return
+	}
+
+	response := quoteResponse{
+		WatchList: quotes,
+		Success: true,
+	}
+
+	c.JSON(http.StatusOK, response)
+
+
 }

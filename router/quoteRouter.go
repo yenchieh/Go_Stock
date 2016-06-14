@@ -6,6 +6,6 @@ import (
 )
 
 func InitQuoteRouter(r *gin.Engine){
-	r.GET("/getQuoteBySymbol", controller.GetQuoteBySymbol)
+	r.GET("/getQuoteBySymbol", controller.GetQuote)
 
 }

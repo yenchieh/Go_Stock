@@ -39,6 +39,12 @@ class SearchStockStore extends EventEmitter {
 		this.emit("updateCheckedList");
 	}
 
+	refreshQuotes(quoteData){
+		this.quoteData = quoteData;
+		this.updateQuoteDataHistory();
+		this.emit("updateQuoteData");
+	}
+
 	getCheckedQuote() {
 		return this.checkedQuote;
 	}
@@ -80,6 +86,9 @@ class SearchStockStore extends EventEmitter {
 				break;
 			case constants.REMOVE_QUOTE:
 				this.removeQuoteByCheckedList();
+				break;
+			case constants.REFRESH_QUOTE_DATA_SEARCH:
+				this.refreshQuotes(action.data);
 				break;
 		}
 	}

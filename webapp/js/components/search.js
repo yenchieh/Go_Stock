@@ -24,9 +24,7 @@ var SearchPage = React.createClass({
 	},
 
 	componentDidMount: function () {
-		this.setState({
-			quoteData: SearchStockStore.getAllQuoteData()
-		});
+		var self = this;
 		this.$optionButtons = $('button', '#listOption');
 
 		if (this.state.checkedQuote.length == 0) {
@@ -37,11 +35,35 @@ var SearchPage = React.createClass({
 
 		this.text = $('input[name="symbol"]');
 		this.$quoteButton = $('#getQuoteButton');
+
+		this.updateQuoteData();
+
+		setTimeout(function(){
+			self.refreshQuotes();
+		}, 1000);
+
+		this.refreshQuoteInterval = setInterval(function(){
+			self.refreshQuotes();
+		}, 25000);
+
 	},
 
 	componentWillUnmount: function(){
 		SearchStockStore.removeListener("updateQuoteData", this.updateQuoteData);
 		SearchStockStore.removeListener("updateCheckedList", this.updateCheckedList);
+		clearInterval(this.refreshQuoteInterval);
+	},
+
+	refreshQuotes(){
+		if(this.state.quoteData.length == 0){
+			return;
+		}
+		var symbols = "";
+		this.state.quoteData.map(function(quote, i){
+			symbols += "," + quote.symbol
+		});
+
+		QuoteAction.getQuoteData(symbols.substring(1), constant.REFRESH_QUOTE_DATA_SEARCH);
 	},
 
 	updateQuoteData: function(){

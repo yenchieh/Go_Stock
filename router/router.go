@@ -11,7 +11,7 @@ import (
 func InitRoutes() *gin.Engine {
 	r := gin.Default()
 	r.LoadHTMLFiles("src/github.com/go_stock_with_gin/index.tmpl")
-	r.GET("/", index)
+	r.GET("/", Index)
 	r.GET("/build/:fileName", resource)
 	r.GET("/testDB", testDB)
 
@@ -22,7 +22,7 @@ func InitRoutes() *gin.Engine {
 	return r
 }
 
-func index(c *gin.Context) {
+func Index(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.tmpl", nil)
 }
 

@@ -1,22 +1,19 @@
 /**
- * Created by yen-chieh on 5/13/16.
+ * Created by yen-chieh on 5/25/16.
  */
 
 import React from 'react';
-import * as QuoteAction from '../actions/QuoteAction.js';
 
-var QuoteTable = React.createClass({
+var WatchListTable = React.createClass({
 	getInitialState: function(){
 		return{
-			quotes: [],
-			checkedQuote: []
+			quotes: []
 		}
 	},
 
 	componentWillReceiveProps: function(props){
 		this.setState({
-			quotes: props.quote,
-			checkedQuote: props.checkedQuote
+			quotes: props.quote
 		})
 	},
 
@@ -30,20 +27,11 @@ var QuoteTable = React.createClass({
 		)
 	},
 
-	setCheckedSymbol: function(event){
-		QuoteAction.updateCheckedQuoteList(event.target.value);
-	},
-
 	render: function(){
 
 		var quoteTable = this.state.quotes.map(function (quote, i) {
-
-			var isChecked = this.state.checkedQuote.indexOf(quote.symbol.toUpperCase()) != -1;
 			return (
 				<tr key={i}>
-					<td>
-						<input type="checkbox" name="checkedSymbol" value={quote.symbol} checked={isChecked} onChange={this.setCheckedSymbol} />
-					</td>
 					<td>
 						{quote.name}
 					</td>
@@ -73,7 +61,6 @@ var QuoteTable = React.createClass({
 				<table className="table table-hover">
 					<thead>
 					<tr>
-						<th></th>
 						<th>Name</th>
 						<th>Symbol</th>
 						<th>Open</th>
@@ -94,4 +81,4 @@ var QuoteTable = React.createClass({
 	}
 });
 
-export default QuoteTable;
+export default WatchListTable;
