@@ -6,23 +6,23 @@ import React from 'react';
 import * as QuoteAction from '../actions/QuoteAction.js';
 
 var QuoteTable = React.createClass({
-	getInitialState: function(){
-		return{
+	getInitialState: function () {
+		return {
 			quotes: [],
 			checkedQuote: []
 		}
 	},
 
-	componentWillReceiveProps: function(props){
+	componentWillReceiveProps: function (props) {
 		this.setState({
 			quotes: props.quote,
 			checkedQuote: props.checkedQuote
 		})
 	},
 
-	renderColoredStockChange: function(change, percentChange){
+	renderColoredStockChange: function (change, percentChange) {
 		let className = change < 0 ? "negative" : "positive";
-		return(
+		return (
 			<div>
 				<span className={className}>{change}</span> / <span className={className}>{percentChange}</span>
 			</div>
@@ -30,19 +30,19 @@ var QuoteTable = React.createClass({
 		)
 	},
 
-	setCheckedSymbol: function(event){
+	setCheckedSymbol: function (event) {
 		QuoteAction.updateCheckedQuoteList(event.target.value);
 	},
 
-	render: function(){
-
+	render: function () {
 		var quoteTable = this.state.quotes.map(function (quote, i) {
 
 			var isChecked = this.state.checkedQuote.indexOf(quote.symbol.toUpperCase()) != -1;
 			return (
 				<tr key={i}>
 					<td>
-						<input type="checkbox" name="checkedSymbol" value={quote.symbol} checked={isChecked} onChange={this.setCheckedSymbol} />
+						<input type="checkbox" name="checkedSymbol" value={quote.symbol} checked={isChecked}
+									 onChange={self.setCheckedSymbol}/>
 					</td>
 					<td>
 						{quote.name}

@@ -1,9 +1,10 @@
+/*jshint esversion: 6 */
 /**
  * Created by yen-chieh on 5/25/16.
  */
 import {EventEmitter} from 'events';
-import dispatcher from '../dispatcher/appDispatcher.js'
-import constant from '../constants/mainConstants.js'
+import dispatcher from '../dispatcher/appDispatcher.js';
+import constant from '../constants/mainConstants.js';
 
 class WatchListStore extends EventEmitter {
 	constructor() {

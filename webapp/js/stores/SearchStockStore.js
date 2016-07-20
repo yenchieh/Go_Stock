@@ -1,8 +1,9 @@
+/*jshint esversion: 6 */
 /**
  * Created by yen-chieh on 5/13/16.
  */
 import {EventEmitter} from 'events';
-import dispatcher from '../dispatcher/appDispatcher.js'
+import dispatcher from '../dispatcher/appDispatcher.js';
 import constants from '../constants/mainConstants.js';
 import update from 'react-addons-update';
 
@@ -14,11 +15,10 @@ class SearchStockStore extends EventEmitter {
 	}
 
 	addQuoteData(quoteData){
-		var self = this;
 		if(quoteData.length > 0){
 			quoteData.map(function(data, i){
-				self.quoteData.unshift(data);
-			})
+				this.quoteData.unshift(data);
+			}.bind(this));
 		}else{
 			this.quoteData.unshift(quoteData);
 		}
@@ -40,7 +40,12 @@ class SearchStockStore extends EventEmitter {
 	}
 
 	refreshQuotes(quoteData){
-		this.quoteData = quoteData;
+		//this.quoteData = quoteData;
+		this.quoteData.map(function(quote, i){
+			if(quote.symbol == quoteData.symbol) {
+				this.quoteData= update(this.quoteData[i], {$set: [quoteData]});
+			}
+		}.bind(this));
 		this.updateQuoteDataHistory();
 		this.emit("updateQuoteData");
 	}
@@ -64,7 +69,7 @@ class SearchStockStore extends EventEmitter {
 		this.quoteData.map(function(data,i){
 			var index = self.checkedQuote.indexOf(data.symbol.toUpperCase());
 			if(index == -1){
-				newQuoteData = update(newQuoteData, {$push: [data]})
+				newQuoteData = update(newQuoteData, {$push: [data]});
 			}
 		});
 		this.checkedQuote = [];

@@ -69,7 +69,7 @@ func getQuoteFromYahoo(symbol string) ([]byte, error){
 	if err != nil {
 		log.Fatal(err)
 	}
-	query := fmt.Sprintf("select finance, Name, Symbol, Change, PercentChange, DaysLow, DaysHigh, Open,PreviousClose, Volume from yahoo.finance.quotes where symbol in (\"%s\")", symbol)
+	query := fmt.Sprintf("select finance, Name, Symbol, Ask, Change, PercentChange, DaysLow, DaysHigh, Open,PreviousClose, Volume from yahoo.finance.quotes where symbol in (\"%s\")", symbol)
 	parameters := url.Values{}
 	parameters.Add("q", query)
 	parameters.Add("format", "json")

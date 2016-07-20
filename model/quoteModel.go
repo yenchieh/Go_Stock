@@ -36,6 +36,7 @@ type (
 		Symbol string `json:"symbol"`
 		Name string `json:"name"`
 		Volume string `json:"volume"`
+		Ask string `json:"ask"`
 	}
 
 	//Handle ArrayStruct or Struct

@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 /**
  * Created by yen-chieh on 5/12/16.
  */

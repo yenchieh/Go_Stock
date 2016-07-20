@@ -1,10 +1,11 @@
+/*jshint esversion: 6 */
 /**
  * Created by yen-chieh on 5/18/16.
  */
 
 import {EventEmitter} from 'events';
-import dispatcher from '../dispatcher/appDispatcher.js'
-import constant from '../constants/mainConstants.js'
+import dispatcher from '../dispatcher/appDispatcher.js';
+import constant from '../constants/mainConstants.js';
 import SearchStockStore from './SearchStockStore.js';
 
 class UserStore extends EventEmitter {
@@ -20,7 +21,7 @@ class UserStore extends EventEmitter {
 	}
 
 	checkedUserEmail(result) {
-		this.emailExistInDatabase = result.exist == true;
+		this.emailExistInDatabase = result.exist === true;
 		this.emit("userEmailChecked");
 	}
 
