@@ -1,3 +1,6 @@
 
 build/*
-webapp/node_modules/*
+node_modules/*
+dist
+gin-bin
+vendor

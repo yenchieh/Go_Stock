@@ -1,15 +1,21 @@
 package main
 
 import (
-	"github.com/go_stock_with_gin/router"
-	"github.com/go_stock_with_gin/common"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	//Bootstrap Database
-	common.InitDatabase()
+	r := gin.Default()
 
-	r := router.InitRoutes()
-	r.Run(":8080")
+	r.Static("/dist", "view/dist")
+	r.LoadHTMLGlob("view/dist/*.html")
+	r.GET("/", index)
 
+	r.Run(":14443")
+}
+
+func index(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.html", nil)
 }
