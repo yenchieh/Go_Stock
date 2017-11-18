@@ -2,46 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba0a7aeb-514a-49bc-b38b-ade2754e3e19" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/common/bootstrap.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/common/errorHandler.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/common/util.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config/constant.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/quote.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/user.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/controller/watchList.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data/database.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index.tmpl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/model/quoteModel.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/model/stockModel.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/model/userModel.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/router/quoteRouter.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/router/router.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/router/userRouter.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/router/watchListRouter.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/actions/ListAction.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/actions/QuoteAction.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/actions/UserAction.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/actions/WatchListAction.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/components/SignUserDialog.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/components/footer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/components/quote.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/components/search.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/components/watchList.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/components/watchListQuote.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/constants/mainConstants.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/dispatcher/appDispatcher.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/stores/ListStore.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/stores/SearchStockStore.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/stores/UserStore.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/stores/WatchListStore.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/js/utils/Dialog.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/scss/index.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/webapp/webpack.config.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Makefile" afterPath="$PROJECT_DIR$/Makefile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.go" afterPath="$PROJECT_DIR$/main.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn.lock" afterPath="$PROJECT_DIR$/yarn.lock" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,7 +17,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
@@ -67,7 +32,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="210">
-                <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+                <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -75,7 +40,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
@@ -89,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/webpack.config.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="584">
-              <caret line="88" column="27" lean-forward="true" selection-start-line="88" selection-start-column="27" selection-end-line="88" selection-end-column="27" />
+              <caret line="88" column="27" lean-forward="false" selection-start-line="88" selection-start-column="27" selection-end-line="88" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -118,12 +83,19 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-              <folding>
-                <marker date="1510975839730" expanded="true" signature="0:1005" ph="{&quot;name&quot;: &quot;go_stock&quot;...}" />
-                <marker date="1510975839730" expanded="true" signature="432:439" ph="{&quot;vue&quot;: &quot;^2.4.4&quot;...}" />
-              </folding>
+            <state relative-caret-position="375">
+              <caret line="25" column="33" lean-forward="true" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Makefile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -174,13 +146,13 @@
         <option value="$PROJECT_DIR$/controller/quote.go" />
         <option value="$PROJECT_DIR$/Gopkg.toml" />
         <option value="$PROJECT_DIR$/.nvmrc" />
-        <option value="$PROJECT_DIR$/Makefile" />
         <option value="$PROJECT_DIR$/view/src/main.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
-        <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/Makefile" />
+        <option value="$PROJECT_DIR$/main.go" />
       </list>
     </option>
   </component>
@@ -201,7 +173,7 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="722" />
+    <option name="x" value="721" />
     <option name="y" value="231" />
     <option name="width" value="1824" />
     <option name="height" value="1138" />
@@ -236,12 +208,6 @@
               <item name="Go_Stock" type="b2602c69:ProjectViewProjectNode" />
               <item name="Go_Stock" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Go_Stock" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Go_Stock" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -373,15 +339,15 @@
       <updated>1510630315265</updated>
       <workItem from="1510630316899" duration="1585000" />
       <workItem from="1510801111418" duration="2639000" />
-      <workItem from="1510968098110" duration="5959000" />
+      <workItem from="1510968098110" duration="7426000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10183000" />
+    <option name="totallyTimeSpent" value="11650000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="722" y="231" width="1824" height="1138" extended-state="0" />
+    <frame x="721" y="231" width="1824" height="1138" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -697,17 +663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding>
-            <marker date="1510975839730" expanded="true" signature="0:1005" ph="{&quot;name&quot;: &quot;go_stock&quot;...}" />
-            <marker date="1510975839730" expanded="true" signature="432:439" ph="{&quot;vue&quot;: &quot;^2.4.4&quot;...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -719,23 +674,7 @@
     <entry file="file://$PROJECT_DIR$/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="584">
-          <caret line="88" column="27" lean-forward="true" selection-start-line="88" selection-start-column="27" selection-end-line="88" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+          <caret line="88" column="27" lean-forward="false" selection-start-line="88" selection-start-column="27" selection-end-line="88" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -748,21 +687,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="6" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="210">
-            <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+            <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
             <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="6" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        <state relative-caret-position="375">
+          <caret line="25" column="33" lean-forward="true" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="21" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>

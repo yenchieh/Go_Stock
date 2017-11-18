@@ -9,7 +9,7 @@ vet:
 	go vet
 
 dev:
-	gin -p 1443 -a 1343 -x node_modules
+	gin -p 8120 -a 8119 -x node_modules
 
 build: clean buildFront
 	GOOS=linux go build -o ./build/main *.go

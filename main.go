@@ -13,7 +13,7 @@ func main() {
 	r.LoadHTMLGlob("view/dist/*.html")
 	r.GET("/", index)
 
-	r.Run(":14443")
+	r.Run(":8119")
 }
 
 func index(c *gin.Context) {
