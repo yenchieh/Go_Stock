@@ -9,6 +9,8 @@ vet:
 	go vet
 
 dev:
+	DEBUG=true \
+	PORT=8119 \
 	gin -p 8120 -a 8119 -x node_modules
 
 build: clean buildFront

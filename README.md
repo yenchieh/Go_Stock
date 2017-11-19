@@ -7,9 +7,10 @@ The instruction is NONE...This project is two years old but since I have better 
 - Use Yahoo Query to get market data: https://developer.yahoo.com
 
 ## Tech
-- Backend - Go
-- Frontend - vue
+- Backend - [Go - Gin Framework](https://github.com/gin-gonic/gin)
+- Frontend - [vue](https://vuejs.org/)
 - Database - Postgres
+- Database Migration - [goose](https://github.com/pressly/goose)
 
 ## License
 [MIT](https://opensource.org/licenses/MIT)

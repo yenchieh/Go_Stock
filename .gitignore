@@ -4,3 +4,4 @@ node_modules/*
 dist
 gin-bin
 vendor
+schema.sql
