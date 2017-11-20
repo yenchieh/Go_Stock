@@ -103,7 +103,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: 'view/src/assets/images', to: 'images'
+        from: 'view/src/assets/', to: './'
       }
     ])
   ]
