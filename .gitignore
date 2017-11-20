@@ -5,3 +5,4 @@ dist
 gin-bin
 vendor
 schema.sql
+.idea

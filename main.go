@@ -67,7 +67,7 @@ func main() {
 
 		r := gin.Default()
 
-		r.Static("/dist", "view/dist")
+		r.Static("/assets", "view/dist/")
 		r.LoadHTMLGlob("view/dist/*.html")
 		r.GET("/", index)
 

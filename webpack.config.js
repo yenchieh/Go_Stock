@@ -1,13 +1,14 @@
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './view/src/main.js',
+  entry: ['babel-polyfill', './view/src/main.js'],
   output: {
     path: path.resolve(__dirname, './view/dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
+    publicPath: '/assets/',
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [
@@ -99,7 +100,12 @@ module.exports = {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'view/src/assets/images', to: 'images'
+      }
+    ])
   ]
 }
 
