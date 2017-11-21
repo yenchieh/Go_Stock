@@ -1,4 +1,4 @@
-.PHONY: deps vet test dev build clean buildFront
+.PHONY: deps vet test dev build clean buildFront goose-up goose-down
 
 DOCKER_REPO_URL = jack08300/Go_Stock
 
@@ -30,3 +30,11 @@ buildFront:
 
 build-image:
 	docker build --rm -t go_stock:latest .
+
+migrate:
+	docker build --rm -t go_stock:latest .
+
+goose-up:
+	cd migrateDB && goose postgres "user=go password=aaaaaa dbname=go_stock sslmode=disable" up && cd ..
+goose-down:
+	cd migrateDB && goose postgres "user=go password=aaaaaa dbname=go_stock sslmode=disable" down && cd ..

@@ -26,7 +26,7 @@ func main() {
 			EnvVar: "DATABASE_USER",
 			Name:   "database_user",
 			Usage:  "Database user name",
-			Value:  "yenchieh",
+			Value:  "go",
 		},
 		cli.StringFlag{
 			EnvVar: "DATABASE_PASSWORD",
