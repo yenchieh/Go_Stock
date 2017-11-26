@@ -1,14 +1,13 @@
 package main
 
 import (
-	"net/http"
 	"os"
 
 	"fmt"
 
-	"github.com/gin-gonic/gin"
 	"github.com/urfave/cli"
 	"github.com/yenchieh/Go_Stock/controller"
+	"github.com/yenchieh/Go_Stock/router"
 )
 
 func main() {
@@ -65,19 +64,11 @@ func main() {
 		db := controller.NewDB()
 		defer db.Close()
 
-		r := gin.Default()
-
-		r.Static("/assets", "view/dist/")
-		r.LoadHTMLGlob("view/dist/*.html")
-		r.GET("/", index)
+		r := router.New()
 
 		return r.Run(fmt.Sprintf(":%s", c.String("port")))
 	}
 
 	app.Run(os.Args)
 
-}
-
-func index(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.html", nil)
 }

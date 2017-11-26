@@ -24,7 +24,7 @@ func SetupDatabase(db Database) {
 }
 
 func NewDB() *sqlx.DB {
-	connectString := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=true", database.User, database.Password, database.IP, database.Name)
+	connectString := fmt.Sprintf("user=%s password=%s host=%s dbname=%s sslmode=disable", database.User, database.Password, database.IP, database.Name)
 
 	db, err := sqlx.Connect("postgres", connectString)
 	if err != nil {

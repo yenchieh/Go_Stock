@@ -5,6 +5,7 @@ import 'vue-material/dist/vue-material.min.css'
 
 import App from './App.vue'
 import router from './router/router';
+import store from "./store/store";
 
 Vue.use(VueMaterial);
 Vue.use(VueRouter);
@@ -12,5 +13,6 @@ Vue.use(VueRouter);
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })

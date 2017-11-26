@@ -38,3 +38,6 @@ goose-up:
 	cd migrateDB && goose postgres "user=go password=aaaaaa dbname=go_stock sslmode=disable" up && cd ..
 goose-down:
 	cd migrateDB && goose postgres "user=go password=aaaaaa dbname=go_stock sslmode=disable" down && cd ..
+
+# To import csv to the database
+# \copy company_list(symbol,name,last_sale,market_cap,ipo_year,sector,industry,summary_quote) from 'company_list.csv' with csv

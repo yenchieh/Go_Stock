@@ -10,11 +10,11 @@ CREATE TABLE account(
 
 CREATE TABLE company_list(
   id SERIAL PRIMARY KEY NOT NULL,
-  symbol CHAR(10) UNIQUE NOT NULL,
+  symbol TEXT UNIQUE NOT NULL,
   name TEXT NOT NULL,
-  last_sale NUMERIC(4, 4),
-  market_cap NUMERIC(15, 2),
-  ipo_year int,
+  last_sale FLOAT,
+  market_cap FLOAT,
+  ipo_year TEXT NULL,
   sector TEXT NULL,
   industry TEXT NULL,
   summary_quote TEXT
