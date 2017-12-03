@@ -16,6 +16,7 @@ func New() *gin.Engine {
 
 	// APIs
 	r.GET("/searchStock", controller.SearchStock)
+	r.GET("/stockDetailByTicker/:ticker", controller.StockDetailByTicker)
 
 	return r
 }

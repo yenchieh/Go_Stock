@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/urfave/cli"
+	"github.com/yenchieh/Go_Stock/config"
 	"github.com/yenchieh/Go_Stock/controller"
 	"github.com/yenchieh/Go_Stock/router"
 )
@@ -51,6 +52,11 @@ func main() {
 			Value:  "8120",
 			Usage:  "",
 		},
+		cli.StringFlag{
+			EnvVar: "ALPHA_VANTAGE_KEY",
+			Name:   "alpha_vantage_key",
+			Usage:  "For retrieve data from alpha vantage",
+		},
 	}
 
 	app.Action = func(c *cli.Context) error {
@@ -59,6 +65,11 @@ func main() {
 			User:     c.String("database_user"),
 			Password: c.String("database_password"),
 			IP:       c.String("database_IP"),
+		})
+
+		config.SetupEnv(config.Environment{
+			Debug:           c.Bool("debug"),
+			AlphaVantageKey: c.String("alpha_vantage_key"),
 		})
 
 		db := controller.NewDB()
